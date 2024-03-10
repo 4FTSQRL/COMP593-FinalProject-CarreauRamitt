@@ -10,9 +10,18 @@ Usage:
 
 Parameters:
   apod_date = APOD date (format: YYYY-MM-DD)
+  
+Students: Elicia Ramitt, Jesse Carreau
 """
+
+# Import Statements
+    # date from datetime
 from datetime import date
+
+    # os
 import os
+    
+    # image_lib
 import image_lib
 
 # Full paths of the image cache folder and database
