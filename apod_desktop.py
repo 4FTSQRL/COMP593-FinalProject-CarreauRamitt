@@ -63,7 +63,7 @@ def get_apod_date():
     Returns:
         date: APOD date
     """
-
+    apod_date = None
     # get date from command line
     if len(argv) > 1:
         apod_date = argv[1]
