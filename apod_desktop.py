@@ -24,6 +24,9 @@ import os
     # image_lib
 import image_lib
 
+    #argv
+from sys import argv
+
 # Full paths of the image cache folder and database
 # - The image cache directory is a subdirectory of the specified parent directory.
 # - The image cache database is a sqlite database located in the image cache directory.
@@ -61,8 +64,21 @@ def get_apod_date():
         date: APOD date
     """
     # TODO: Complete function body
-    # Hint: The following line of code shows how to convert and ISO-formatted date string to a date object
-    apod_date = date.fromisoformat('2022-12-25')
+    # get date from command line
+    apod_date = argv[1]
+
+    # if date is provided, validate it
+    if apod_date is not None:
+        try:
+            apod_date = date.fromisoformat(apod_date)
+        except ValueError:
+            # if invalid date, use today's date
+            print("Invalid date. Please provide a date in the format YYYY-MM-DD. Today's date will be used instead.")
+            apod_date = date.today()
+            exit()
+    else:
+        apod_date = date.today()
+    
     return apod_date
 
 def init_apod_cache():
