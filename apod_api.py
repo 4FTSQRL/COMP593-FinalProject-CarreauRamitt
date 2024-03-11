@@ -3,7 +3,10 @@ Library for interacting with NASA's Astronomy Picture of the Day API.
 '''
 # Import statements
 from sys import argv
+import requests
 
+
+# Main Function
 def main():
     # TODO: Add code to test the functions in this module
     return
