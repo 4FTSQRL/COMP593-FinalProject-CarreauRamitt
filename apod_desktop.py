@@ -63,21 +63,22 @@ def get_apod_date():
     Returns:
         date: APOD date
     """
-    # TODO: Complete function body
+    apod_date = None
     # get date from command line
-    apod_date = argv[1]
-
-    # if date is provided, validate it
-    if apod_date is not None:
-        try:
-            apod_date = date.fromisoformat(apod_date)
-        except ValueError:
-            # if invalid date, use today's date
-            print("Invalid date. Please provide a date in the format YYYY-MM-DD. Today's date will be used instead.")
-            apod_date = date.today()
-            exit()
+    if len(argv) > 1:
+        apod_date = argv[1]
     else:
-        apod_date = date.today()
+        #if date is provided, validate it
+        if apod_date is not None:
+            try:
+                apod_date = date.fromisoformat(apod_date)
+            except ValueError:
+                # if invalid date, use today's date
+                print("Invalid date. Please provide a date in the format YYYY-MM-DD. Today's date will be used instead.")
+                apod_date = date.today()
+                exit()
+        else:
+            apod_date = date.today()
     
     return apod_date
 
