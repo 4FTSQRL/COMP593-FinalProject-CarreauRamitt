@@ -4,6 +4,7 @@ Library for interacting with NASA's Astronomy Picture of the Day API.
 # Import statements
 import requests
 import json
+from apod_desktop import get_apod_date
 
 # Constants
 # APOD's URL
@@ -13,7 +14,13 @@ API_KEY = 'U7HLRY5ArCpjWIorpQN3fx4INNzCpVXkuNv4jYgw'
 
 # Main Function
 def main():
-    # TODO: Add code to test the functions in this module
+    # TODO: Add code to test the functions in this module.
+    
+    # Get the date for the APOD
+    date = get_apod_date()
+    
+    # Get the APOD info
+    get_apod_info(date)
     return
 
 def get_apod_info(apod_date):
@@ -47,6 +54,17 @@ def get_apod_info(apod_date):
         # Convert to a dictionary
         dictAPOD = json.loads(respMsg.content)
         
+        # Get title and print it
+        title = dictAPOD["title"].title()
+        
+        print(f"APOD Title: {title}")
+        
+        # Get URL and print it
+        url = dictAPOD["url"]
+        
+        print(f"APOD URL: {url}")
+        
+        
         # Return dictionary
         return dictAPOD
     
@@ -75,6 +93,7 @@ def get_apod_image_url(apod_info_dict):
     """
     # TODO: Complete the function body
     # Hint: The APOD info dictionary includes a key named 'media_type' that indicates whether the APOD is an image or video
+    
     return
 
 if __name__ == '__main__':
