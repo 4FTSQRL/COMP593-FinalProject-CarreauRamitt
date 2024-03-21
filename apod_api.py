@@ -58,13 +58,7 @@ def get_apod_info(apod_date):
         title = dictAPOD["title"].title()
         
         print(f"APOD Title: {title}")
-        
-        # Get URL and print it
-        url = dictAPOD["url"]
-        
-        print(f"APOD URL: {url}")
-        
-        
+
         # Return dictionary
         return dictAPOD
     
