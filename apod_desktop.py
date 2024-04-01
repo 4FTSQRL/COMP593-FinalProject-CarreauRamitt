@@ -63,6 +63,7 @@ def get_apod_date():
     Returns:
         date: APOD date
     """
+    #TODO: Add error checking for invalid date format
     apod_date = None
     # get date from command line
     if len(argv) > 1:
