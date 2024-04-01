@@ -6,9 +6,16 @@ Library of useful functions for working with images.
 import requests
     # ctypes
 import ctypes
+# Import apod_api
+import apod_api
+import apod_desktop
 
 def main():
     # TODO: Add code to test the functions in this module
+    date = apod_desktop.get_apod_date()
+    info = apod_api.get_apod_info(date)
+    url = apod_api.get_apod_image_url(info)
+    download_image(url)
     return
 
 def download_image(image_url):
