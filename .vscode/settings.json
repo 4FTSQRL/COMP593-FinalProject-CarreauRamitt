@@ -1,0 +1,5 @@
+{
+    "debug.showInStatusBar": "always",
+    "debug.showSubSessionsInToolBar": true,
+    "debug.toolBarLocation": "docked"
+}
