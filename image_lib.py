@@ -4,6 +4,9 @@ Library of useful functions for working with images.
 # Import statements
     # Requests
 import requests
+    # PIL package
+from PIL import Image
+import PIL
 def main():
     # TODO: Add code to test the functions in this module
     return
@@ -48,7 +51,14 @@ def save_image_file(image_data, image_path):
         bool: True, if succcessful. False, if unsuccessful
     """
     # TODO: Complete function body
-    return
+    # Open the file
+    with open(image_path, "wb") as f:
+        # Write the data
+        f.write(image_data)
+        # Return true
+        return True
+    # Return false if failed
+    return False
 
 def set_desktop_background_image(image_path):
     """Sets the desktop background image to a specific image.
