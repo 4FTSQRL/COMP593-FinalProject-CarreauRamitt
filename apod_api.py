@@ -86,6 +86,16 @@ def get_apod_image_url(apod_info_dict):
         str: APOD image URL
     """
     # TODO: Complete the function body
+
+    # Check if the APOD is an image
+
+    # If it is an image, get the URL of the high definition image
+
+    # If it is a video, get the URL of the video thumbnail
+
+    # Return the URL
+
+    
     # Hint: The APOD info dictionary includes a key named 'media_type' that indicates whether the APOD is an image or video
     
     return
