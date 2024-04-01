@@ -1,6 +1,9 @@
 '''
 Library of useful functions for working with images.
 '''
+# Import statements
+    # Requests
+import requests
 def main():
     # TODO: Add code to test the functions in this module
     return
@@ -14,10 +17,23 @@ def download_image(image_url):
         image_url (str): URL of image
 
     Returns:
-        bytes: Binary image data, if succcessful. None, if unsuccessful.
+        binData (bytes): Binary image data, if succcessful. None, if unsuccessful.
     """
     # TODO: Complete function body
-    return
+    # Get the requests for the url
+    resp = requests.get(image_url)
+    
+    # Check if it succeeded
+    if resp.status_code.ok:
+        # Get the binary data
+        binData = resp.content
+        # Return the binary data
+        return binData
+    
+    # Check if failed
+    else:
+        # Return none
+        return None
 
 def save_image_file(image_data, image_path):
     """Saves image data as a file on disk.
