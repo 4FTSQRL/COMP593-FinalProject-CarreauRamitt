@@ -4,9 +4,9 @@ Library of useful functions for working with images.
 # Import statements
     # Requests
 import requests
-    # PIL package
-from PIL import Image
-import PIL
+    # ctypes
+import ctypes
+
 def main():
     # TODO: Add code to test the functions in this module
     return
