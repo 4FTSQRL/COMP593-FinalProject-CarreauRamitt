@@ -21,7 +21,8 @@ def main():
     
     # Get the APOD info
     get_apod_info(date)
-    return
+    
+
 
 def get_apod_info(apod_date):
     """Gets information from the NASA API for the Astronomy 
@@ -88,11 +89,12 @@ def get_apod_image_url(apod_info_dict):
 
     # Check if the APOD is an image
 
-    apod_info_dict = get_apod_info()
+    date = get_apod_date()  
+    apod_info_dict = get_apod_info(date)
     # If it is an image, get the URL of the high definition image
     if apod_info_dict['media_type'] == 'image':
         return apod_info_dict['hdurl']
-     # If it is a video, get the URL of the video thumbnail
+    # If it is a video, get the URL of the video thumbnail
     else:
         return apod_info_dict['thumbnail_url']
     
