@@ -9,13 +9,17 @@ import ctypes
 # Import apod_api
 import apod_api
 import apod_desktop
+# Import base64
+import base64
 
 def main():
     # TODO: Add code to test the functions in this module
     date = apod_desktop.get_apod_date()
     info = apod_api.get_apod_info(date)
     url = apod_api.get_apod_image_url(info)
-    download_image(url)
+    bind = download_image(url)
+    save_image_file(bind, "APODPic.jpg")
+    set_desktop_background_image(bind)
     return
 
 def download_image(image_url):
@@ -34,7 +38,7 @@ def download_image(image_url):
     resp = requests.get(image_url)
     
     # Check if it succeeded
-    if resp.status_code.ok:
+    if resp.status_code == requests.codes.ok:
         # Get the binary data
         binData = resp.content
         # Return the binary data
@@ -60,7 +64,7 @@ def save_image_file(image_data, image_path):
     # TODO: Complete function body
     # Open the file
     with open(image_path, "wb") as f:
-        # Write the data
+        # Write
         f.write(image_data)
         # Return true
         return True
