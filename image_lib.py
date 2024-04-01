@@ -11,6 +11,7 @@ import apod_api
 import apod_desktop
 # Import base64
 import base64
+from PIL import Image
 
 def main():
     # TODO: Add code to test the functions in this module
@@ -84,7 +85,12 @@ def set_desktop_background_image(image_path):
     # Try and except
     try:
         # Set the desktop background pic
-        ctypes.windll.user32.SystemParametersInfo(20, 0, image_path, 0)
+        ctypes.windll.user32.SystemParametersInfoA(20, 0, image_path, 0)
+        # Get size
+        with Image.open(image_path) as img:
+            size = img.size
+            # Scale image
+            scale_image(size)
         # Return true
         return True
     # Except Statement
