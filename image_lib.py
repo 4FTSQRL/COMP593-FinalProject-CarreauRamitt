@@ -70,7 +70,15 @@ def set_desktop_background_image(image_path):
         bytes: True, if succcessful. False, if unsuccessful        
     """
     # TODO: Complete function body
-    return
+    # Try and except
+    try:
+        # Set the desktop background pic
+        ctypes.windll.user32.SystemParametersInfo(20, 0, image_path, 0)
+        # Return true
+        return True
+    # Except Statement
+    except:
+        return False
 
 def scale_image(image_size, max_size=(800, 600)):
     """Calculates the dimensions of an image scaled to a maximum width
