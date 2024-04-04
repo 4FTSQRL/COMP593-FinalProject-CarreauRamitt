@@ -9,13 +9,18 @@ import ctypes
 # Import apod_api
 import apod_api
 import apod_desktop
+# Import os
+import os
+from PIL import Image
 
 def main():
     # TODO: Add code to test the functions in this module
     date = apod_desktop.get_apod_date()
     info = apod_api.get_apod_info(date)
     url = apod_api.get_apod_image_url(info)
-    download_image(url)
+    bind = download_image(url)
+    save_image_file(bind, "APODPic.jpg")
+    set_desktop_background_image("APODPic.jpg")
     return
 
 def download_image(image_url):
@@ -34,7 +39,7 @@ def download_image(image_url):
     resp = requests.get(image_url)
     
     # Check if it succeeded
-    if resp.status_code.ok:
+    if resp.status_code == requests.codes.ok:
         # Get the binary data
         binData = resp.content
         # Return the binary data
@@ -60,7 +65,7 @@ def save_image_file(image_data, image_path):
     # TODO: Complete function body
     # Open the file
     with open(image_path, "wb") as f:
-        # Write the data
+        # Write
         f.write(image_data)
         # Return true
         return True
@@ -77,10 +82,17 @@ def set_desktop_background_image(image_path):
         bytes: True, if succcessful. False, if unsuccessful        
     """
     # TODO: Complete function body
+    # Get the absolute path
+    image_path = os.path.abspath(image_path)
     # Try and except
     try:
         # Set the desktop background pic
-        ctypes.windll.user32.SystemParametersInfo(20, 0, image_path, 0)
+        ctypes.windll.user32.SystemParametersInfoW(20, 0, image_path, 0)
+        # Get size
+        with Image.open(image_path) as img:
+            size = img.size
+            # Scale image
+            scale_image(size)
         # Return true
         return True
     # Except Statement
