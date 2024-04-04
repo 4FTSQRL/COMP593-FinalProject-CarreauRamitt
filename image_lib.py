@@ -9,8 +9,8 @@ import ctypes
 # Import apod_api
 import apod_api
 import apod_desktop
-# Import base64
-import base64
+# Import os
+import os
 from PIL import Image
 
 def main():
@@ -20,7 +20,7 @@ def main():
     url = apod_api.get_apod_image_url(info)
     bind = download_image(url)
     save_image_file(bind, "APODPic.jpg")
-    set_desktop_background_image(bind)
+    set_desktop_background_image("APODPic.jpg")
     return
 
 def download_image(image_url):
@@ -82,10 +82,12 @@ def set_desktop_background_image(image_path):
         bytes: True, if succcessful. False, if unsuccessful        
     """
     # TODO: Complete function body
+    # Get the absolute path
+    image_path = os.path.abspath(image_path)
     # Try and except
     try:
         # Set the desktop background pic
-        ctypes.windll.user32.SystemParametersInfoA(20, 0, image_path, 0)
+        ctypes.windll.user32.SystemParametersInfoW(20, 0, image_path, 0)
         # Get size
         with Image.open(image_path) as img:
             size = img.size
