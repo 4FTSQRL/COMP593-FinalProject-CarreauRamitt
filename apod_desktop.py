@@ -66,6 +66,7 @@ def get_apod_date():
     Returns:
         date: APOD date
     """
+    today_date = date.today()
     apod_date = None
     apod_start_date = date(1995, 6, 16)  
     # get date from command line
@@ -78,19 +79,19 @@ def get_apod_date():
                 apod_date = date.fromisoformat(apod_date)
         
                    #check if date is prior to june 16th 1995, and if it is, use today's date
-                if apod_date < apod_start_date:
+                if apod_date < apod_start_date or apod_date > today_date:
            
                      print("The APOD date must be on or after June 16, 1995. Today's date will be used instead.")
-                     apod_date = date.today()
+                     apod_date = today_date
                 
             except ValueError:
                 # if invalid date, use today's date
                 print("Invalid date. Please provide a date in the format YYYY-MM-DD. Today's date will be used instead.")
-                apod_date = date.today()
+                apod_date = today_date
                 exit()
     else:
         #use today's date if no date is provided
-        apod_date = date.today()
+        apod_date = today_date
    
     return apod_date
      
