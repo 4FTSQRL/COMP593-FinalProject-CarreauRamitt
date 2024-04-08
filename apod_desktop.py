@@ -66,9 +66,12 @@ def get_apod_date():
     Returns:
         date: APOD date
     """
-    #TODO: Add error checking for invalid date format
     apod_date = None
     # get date from command line
+
+    
+
+
     if len(argv) > 1:
         apod_date = argv[1]
     else:
@@ -76,14 +79,20 @@ def get_apod_date():
         if apod_date is not None:
             try:
                 apod_date = date.fromisoformat(apod_date)
+                if apod_date < date.fromisoformat('1995-06-16'):
+                     print("Invalid date. APOD dates begin on June 16th 1995. Today's date will be used instead.")
+                     apod_date = date.today()
+                else:
+                    pass
+                
+        
             except ValueError:
                 # if invalid date, use today's date
                 print("Invalid date. Please provide a date in the format YYYY-MM-DD. Today's date will be used instead.")
                 apod_date = date.today()
                 exit()
-        else:
-            apod_date = date.today()
-    
+        #error checking for dates prior to june 16, 1995 in iso format, only matters for CLI input
+        
     return apod_date
 
 def init_apod_cache():
