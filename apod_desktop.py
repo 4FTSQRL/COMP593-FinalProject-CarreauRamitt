@@ -111,14 +111,23 @@ def init_apod_cache():
         print(f"Image cache directory created.")
     # Else let user know
     else:
-        print(f"Image cache exists")
+        print(f"Image cache directory exists.")
+        
     # TODO: Create the DB if it does not already exist
-    """with open(image_cache_db):
-        pass
+    # Tell user where it is
+    print(f"Image cache DB: {image_cache_db}")
+    # Check if it exists
     if not os.path.isfile(image_cache_db):
+        # Creating database update foer user
+        print("Image cache DB created.")
+        # Create the database
         con = sqlite3.connect(image_cache_db)
         cur = con.cursor()
-        con.close()"""
+        # Close it up
+        con.close()
+    # If it already exists tell user
+    else:
+        print(f"Image cache DB exists.")
     return
 
 def add_apod_to_cache(apod_date):
