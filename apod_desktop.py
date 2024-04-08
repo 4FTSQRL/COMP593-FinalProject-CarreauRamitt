@@ -30,6 +30,8 @@ from sys import argv
     # Import SQLite
 import sqlite3
 
+    # Import regex
+import re
 # Full paths of the image cache folder and database
 # - The image cache directory is a subdirectory of the specified parent directory.
 # - The image cache database is a sqlite database located in the image cache directory.
@@ -147,20 +149,35 @@ def add_apod_to_cache(apod_date):
     """
    # print("APOD date:", apod_date.isoformat())
     # TODO: Download the APOD information from the NASA API
-    # Hint: Use a function from apod_api.py 
+ 
+    apod_info = get_apod_info(apod_date)
+
 
     # TODO: Download the APOD image
     # Hint: Use a function from image_lib.py 
 
+    apod_image = image_lib.download_image(apod_info['url'])
+
     # TODO: Check whether the APOD already exists in the image cache
     # Hint: Use the get_apod_id_from_db() function below
+    apod_id = get_apod_id_from_db(apod_info['sha256'])
+
+    # If the APOD does not exist in the cache, add it
+    if apod_id == 0:
+        # Add APOD to Cache
+        apod_id = add_apod_to_db(apod_info['title'], apod_info['explanation'], apod_info['file_path'], apod_info['sha256'])
 
     # TODO: Save the APOD file to the image cache directory
-    # Hint: Use the determine_apod_file_path() function below to determine the image file path
-    # Hint: Use a function from image_lib.py to save the image file
+    #Use the determine_apod_file_path() function below to determine the image file path
+    image_path = determine_apod_file_path(apod_info['title'], apod_info['url'])
+    #Use a function from image_lib.py to save the image file
+    image_lib.save_image_file(apod_image, image_path)
+
 
     # TODO: Add the APOD information to the DB
+
     # Hint: Use the add_apod_to_db() function below
+    add_apod_to_cache(apod_date)
     return 0
 
 def add_apod_to_db(title, explanation, file_path, sha256):
@@ -176,7 +193,17 @@ def add_apod_to_db(title, explanation, file_path, sha256):
         int: The ID of the newly inserted APOD record, if successful. Zero, if unsuccessful       
     """
     # TODO: Complete function body
-    return 0
+
+    # Connect to the database
+    con = sqlite3.connect(image_cache_db)
+    cur = con.cursor()
+
+    # Insert the APOD information into the DB
+    cur.execute("INSERT INTO apod (title, explanation, file_path, sha256) VALUES (?, ?, ?, ?)", (title, explanation, file_path, sha256))
+    # Commit the changes
+    con.commit()
+
+    return 0 
 
 def get_apod_id_from_db(image_sha256):
     """Gets the record ID of the APOD in the cache having a specified SHA-256 hash value
@@ -217,9 +244,26 @@ def determine_apod_file_path(image_title, image_url):
     Returns:
         str: Full path at which the APOD image file must be saved in the image cache directory
     """
-    # TODO: Complete function body
-    # Hint: Use regex and/or str class methods to determine the filename.
-    return
+    # regex pattern
+    regex_pattern = r"[^a-zA-Z0-9\s]"
+
+    #Strip down and reassamble to create file name/path
+
+    #file extension
+    file_extension = image_url.split('.')[-1]
+
+    #file name
+    file_name = image_title.strip().replace(" ", "_")
+
+    #use regex to remove unwanted characters
+    file_name = re.sub(regex_pattern, "", file_name)
+ 
+    #full path
+    file_path = os.path.join(image_cache_dir, f"{file_name}.{file_extension}")
+
+
+    return file_path
+    
 
 def get_apod_info(image_id):
     """Gets the title, explanation, and full path of the APOD having a specified
@@ -234,10 +278,12 @@ def get_apod_info(image_id):
     # TODO: Query DB for image info
     # TODO: Put information into a dictionary
     apod_info = {
-        #'title': , 
-        #'explanation': ,
-        'file_path': 'TBD',
+        'title': 'Title',
+        'explanation': 'Explanation',
+        'file_path': 'File Path',
+        'sha256': 'SHA-256'
     }
+
     return apod_info
 
 def get_all_apod_titles():
@@ -246,8 +292,9 @@ def get_all_apod_titles():
     Returns:
         list: Titles of all images in the cache
     """
-    # TODO: Complete function body
-    # NOTE: This function is only needed to support the APOD viewer GUI
+    # get list of all titles in image cache 
+    
+
     return
 
 if __name__ == '__main__':
