@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 #import apod_desktop
+#import cytpe
+import ctypes
 
 # Initialize the image cache
 #apod_desktop.init_apod_cache()
@@ -30,6 +32,11 @@ bottom_left_frame.grid(row=1, column=0, padx=10, pady=10)
 #frame for date entry and get download image button (bottom right frame)
 bottom_right_frame = LabelFrame(root, text="Get More Images", padx=10, pady=10)
 bottom_right_frame.grid(row=1, column=1, padx=10, pady=10)
+
+# TODO: Set Icon
+iconID = 'COMP593.APODViewer'
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(iconID)
+root.iconbitmap('nasa.ico')
 
 
 
