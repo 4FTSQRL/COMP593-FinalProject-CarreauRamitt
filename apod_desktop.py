@@ -27,6 +27,9 @@ import image_lib
     #argv
 from sys import argv
 
+    # Import SQLite
+import sqlite3
+
 # Full paths of the image cache folder and database
 # - The image cache directory is a subdirectory of the specified parent directory.
 # - The image cache database is a sqlite database located in the image cache directory.
@@ -98,7 +101,20 @@ def init_apod_cache():
     - Creating the image cache database if it does not already exist.
     """
     # TODO: Create the image cache directory if it does not already exist
+    # Tell user where it is
+    print(f"Image cache directory: {image_cache_dir}")
+    # Check if it exists
+    if not image_cache_dir in script_dir:
+        # Create image cache directory
+        with open(image_cache_dir, 'w') as file:
+            # Tell user the script is creating the directory
+            print(f"Image cache directory created.")
+            pass
+    
     # TODO: Create the DB if it does not already exist
+    if not image_cache_db in script_dir:
+        with open(image_cache_db, 'w') as file:
+            pass
     return
 
 def add_apod_to_cache(apod_date):
