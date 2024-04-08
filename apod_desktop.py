@@ -97,8 +97,9 @@ def init_apod_cache():
         with open(image_cache_dir, 'w') as file:
             pass
     # TODO: Create the DB if it does not already exist
-    if not image_cache_db:
-        image_cache_db
+    if not image_cache_db in script_dir:
+        with open(image_cache_db, 'w') as file:
+            pass
     return
 
 def add_apod_to_cache(apod_date):
