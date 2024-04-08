@@ -67,33 +67,28 @@ def get_apod_date():
         date: APOD date
     """
     apod_date = None
+    apod_start_date = date(1995, 6, 16)  
     # get date from command line
-
-    
-
-
     if len(argv) > 1:
         apod_date = argv[1]
     else:
         #if date is provided, validate it
         if apod_date is not None:
             try:
+                # try to convert the date to a date object
                 apod_date = date.fromisoformat(apod_date)
-                if apod_date < date.fromisoformat('1995-06-16'):
-                     print("Invalid date. APOD dates begin on June 16th 1995. Today's date will be used instead.")
-                     apod_date = date.today()
-                else:
-                    pass
-                
-        
+
             except ValueError:
                 # if invalid date, use today's date
                 print("Invalid date. Please provide a date in the format YYYY-MM-DD. Today's date will be used instead.")
                 apod_date = date.today()
                 exit()
-        #error checking for dates prior to june 16, 1995 in iso format, only matters for CLI input
+        #check if date is prior to june 16th 1995, and if it is, use today's date
+        elif apod_date < apod_start_date:
+            print("The APOD date must be on or after June 16, 1995. Today's date will be used instead.")
+            apod_date = date.today()
         
-    return apod_date
+            return apod_date
 
 def init_apod_cache():
     """Initializes the image cache by:
