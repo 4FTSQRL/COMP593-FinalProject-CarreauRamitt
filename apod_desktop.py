@@ -71,24 +71,29 @@ def get_apod_date():
     # get date from command line
     if len(argv) > 1:
         apod_date = argv[1]
-    else:
         #if date is provided, validate it
         if apod_date is not None:
             try:
                 # try to convert the date to a date object
                 apod_date = date.fromisoformat(apod_date)
-
+        
+                   #check if date is prior to june 16th 1995, and if it is, use today's date
+                if apod_date < apod_start_date:
+           
+                     print("The APOD date must be on or after June 16, 1995. Today's date will be used instead.")
+                     apod_date = date.today()
+                
             except ValueError:
                 # if invalid date, use today's date
                 print("Invalid date. Please provide a date in the format YYYY-MM-DD. Today's date will be used instead.")
                 apod_date = date.today()
                 exit()
-        #check if date is prior to june 16th 1995, and if it is, use today's date
-        elif apod_date < apod_start_date:
-            print("The APOD date must be on or after June 16, 1995. Today's date will be used instead.")
-            apod_date = date.today()
-        
-            return apod_date
+    else:
+        #use today's date if no date is provided
+        apod_date = date.today()
+   
+    return apod_date
+     
 
 def init_apod_cache():
     """Initializes the image cache by:
@@ -130,7 +135,7 @@ def add_apod_to_cache(apod_date):
         int: Record ID of the APOD in the image cache DB, if a new APOD is added to the
         cache successfully or if the APOD already exists in the cache. Zero, if unsuccessful.
     """
-    print("APOD date:", apod_date.isoformat())
+   # print("APOD date:", apod_date.isoformat())
     # TODO: Download the APOD information from the NASA API
     # Hint: Use a function from apod_api.py 
 
