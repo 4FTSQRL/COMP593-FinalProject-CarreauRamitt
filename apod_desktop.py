@@ -27,6 +27,9 @@ import image_lib
     #argv
 from sys import argv
 
+    # Import SQLite
+import sqlite3
+
 # Full paths of the image cache folder and database
 # - The image cache directory is a subdirectory of the specified parent directory.
 # - The image cache database is a sqlite database located in the image cache directory.
