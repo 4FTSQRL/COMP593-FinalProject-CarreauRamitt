@@ -153,12 +153,11 @@ def add_apod_to_cache(apod_date):
     apod_info = get_apod_info(apod_date)
 
 
-    # TODO: Download the APOD image
+   
     # Hint: Use a function from image_lib.py 
 
     apod_image = image_lib.download_image(apod_info['url'])
 
-    # TODO: Check whether the APOD already exists in the image cache
     # Hint: Use the get_apod_id_from_db() function below
     apod_id = get_apod_id_from_db(apod_info['sha256'])
 
@@ -167,14 +166,12 @@ def add_apod_to_cache(apod_date):
         # Add APOD to Cache
         apod_id = add_apod_to_db(apod_info['title'], apod_info['explanation'], apod_info['file_path'], apod_info['sha256'])
 
-    # TODO: Save the APOD file to the image cache directory
+  
     #Use the determine_apod_file_path() function below to determine the image file path
     image_path = determine_apod_file_path(apod_info['title'], apod_info['url'])
     #Use a function from image_lib.py to save the image file
     image_lib.save_image_file(apod_image, image_path)
 
-
-    # TODO: Add the APOD information to the DB
 
     # Hint: Use the add_apod_to_db() function below
     add_apod_to_cache(apod_date)
@@ -192,7 +189,7 @@ def add_apod_to_db(title, explanation, file_path, sha256):
     Returns:
         int: The ID of the newly inserted APOD record, if successful. Zero, if unsuccessful       
     """
-    # TODO: Complete function body
+
 
     # Connect to the database
     con = sqlite3.connect(image_cache_db)
