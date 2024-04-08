@@ -47,4 +47,13 @@ img = ImageTk.PhotoImage(openIMG)
 imgLbl = Label(image_frame, image=img)
 imgLbl.grid()
 
+# TODO: Select Image Label
+selImgLbl = Label(bottom_left_frame, text="Select Image:")
+selImgLbl.grid()
+# TODO: Select Image drop down
+selImgcmbx = ttk.Combobox(bottom_left_frame)
+selImgcmbx.grid()
+# TODO: Set as Desktop button
+setDskBtn = Button(bottom_left_frame, text="Set as Desktop")
+setDskBtn.grid(row=1,column=1, padx=10)
 root.mainloop()
