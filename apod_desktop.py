@@ -147,7 +147,7 @@ def add_apod_to_cache(apod_date):
         int: Record ID of the APOD in the image cache DB, if a new APOD is added to the
         cache successfully or if the APOD already exists in the cache. Zero, if unsuccessful.
     """
-   # print("APOD date:", apod_date.isoformat())
+    print("APOD date:", apod_date.isoformat())
     # TODO: Download the APOD information from the NASA API
  
     apod_info = get_apod_info(apod_date)
