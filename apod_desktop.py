@@ -213,8 +213,22 @@ def get_apod_id_from_db(image_sha256):
     Returns:
         int: Record ID of the APOD in the image cache DB, if it exists. Zero, if it does not.
     """
-    # TODO: Complete function body
-    return 0
+   
+    # Connect to the database
+    con = sqlite3.connect(image_cache_db)
+    cur = con.cursor()
+    # Get the record ID of the APOD in the cache
+    cur.execute("SELECT id FROM apod WHERE sha256 = ?", (image_sha256,))
+    # Fetch the record ID
+    apod_id = cur.fetchone()
+    # Close the connection
+    con.close()
+    # Return the record ID
+    if apod_id is not None:
+        return apod_id[0]  
+    
+    else:
+        return 0
 
 def determine_apod_file_path(image_title, image_url):
     """Determines the path at which a newly downloaded APOD image must be 
@@ -291,8 +305,8 @@ def get_all_apod_titles():
     """
     # get list of all titles in image cache 
     
+    return 
 
-    return
 
 if __name__ == '__main__':
     main()
