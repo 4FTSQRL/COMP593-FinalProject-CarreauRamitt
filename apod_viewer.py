@@ -5,6 +5,8 @@ from tkinter import ttk
 import ctypes
 # pillow
 from PIL import Image, ImageTk
+# tkcalendar
+from tkcalendar import Calendar
 
 # Initialize the image cache
 #apod_desktop.init_apod_cache()
@@ -37,11 +39,11 @@ image_frame.grid(row=0, column=0, columnspan=2)
 
 #frame for cached image and set button (bottom left frame)
 bottom_left_frame = LabelFrame(root, text="View Cached Image")
-bottom_left_frame.grid(row=1, column=0)
+bottom_left_frame.grid(row=1, column=0, padx=10)
 
 #frame for date entry and get download image button (bottom right frame)
 bottom_right_frame = LabelFrame(root, text="Get More Images")
-bottom_right_frame.grid(row=1, column=1)
+bottom_right_frame.grid(row=1, column=1, padx=10)
 
 # TODO: Set Icon
 iconID = 'COMP593.APODViewer'
@@ -60,14 +62,16 @@ selImgLbl = Label(bottom_left_frame, text="Select Image:")
 selImgLbl.grid()
 # TODO: Select Image drop down
 selImgcmbx = ttk.Combobox(bottom_left_frame)
-selImgcmbx.grid()
+selImgcmbx.grid(padx=(10,3))
 # TODO: Set as Desktop button
 setDskBtn = Button(bottom_left_frame, text="Set as Desktop")
-setDskBtn.grid(row=1,column=1, padx=10)
+setDskBtn.grid(row=1,column=1, padx=10, pady=3)
 
 # TODO: Select Date Label
 selDateLbl = Label(bottom_right_frame, text="Select Date:")
 selDateLbl.grid()
+# TODO: Calendar Date Picker
+cal = Calendar(bottom_right_frame, selectmode = 'day', year=1995, month=6, day=16)
 # TODO: Download Image Button
 dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
 dwnldImgBtn.grid(row=1, column=1, pady=10)
