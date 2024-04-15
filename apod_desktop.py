@@ -83,7 +83,7 @@ def get_apod_date():
                    #check if date is prior to june 16th 1995, and if it is, use today's date
                 if apod_date < apod_start_date or apod_date > today_date:
            
-                     print("The APOD date must be on or after June 16, 1995. Today's date will be used instead.")
+                     print("The APOD date must be between June 16th 1995, and today. Today's date will be used instead.")
                      apod_date = today_date
                 
             except ValueError:
@@ -289,7 +289,6 @@ def get_apod_info(image_id):
     #connect and cursor
     con = sqlite3.connect(image_cache_db)
     cur = con.cursor()
-
     #query 
 
     Get_apod_info_query = {
