@@ -292,13 +292,21 @@ def get_apod_info(image_id):
 
     #query 
 
-    Get_apod_info_query = {
+    """Get_apod_info_query = {
         'title': 'Title',
         'explanation': 'Explanation',
         'file_path': 'File Path',
         'sha256': 'SHA-256'
-    }
-
+    }"""
+    Get_apod_info_query = """
+    CREATE TABLE IF NOT EXISTS info
+    (
+        title   TEXT NOT NULL,
+        explanation TEXT NOT NULL,
+        file_path   TEXT NOT NULL,
+        sha256  TEXT NOT NULL
+    )
+    """
     #execute the query
     cur.execute(Get_apod_info_query)
 
