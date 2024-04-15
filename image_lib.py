@@ -62,7 +62,7 @@ def save_image_file(image_data, image_path):
     Returns:
         bool: True, if succcessful. False, if unsuccessful
     """
-    # TODO: Complete function body
+
     # Open the file
     with open(image_path, "wb") as f:
         # Write

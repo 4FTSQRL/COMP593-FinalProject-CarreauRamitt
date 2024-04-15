@@ -286,14 +286,27 @@ def get_apod_info(image_id):
     Returns:
         dict: Dictionary of APOD information
     """
-    # TODO: Query DB for image info
-    # TODO: Put information into a dictionary
-    apod_info = {
+    #connect and cursor
+    con = sqlite3.connect(image_cache_db)
+    cur = con.cursor()
+
+    #query 
+
+    Get_apod_info_query = {
         'title': 'Title',
         'explanation': 'Explanation',
         'file_path': 'File Path',
         'sha256': 'SHA-256'
     }
+
+    #execute the query
+    cur.execute(Get_apod_info_query)
+
+    # fetch the APOD information
+    apod_info = cur.fetchall()
+
+    #close the connection
+    con.close()
 
     return apod_info
 
