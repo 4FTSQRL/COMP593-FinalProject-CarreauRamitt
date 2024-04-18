@@ -159,9 +159,9 @@ def show_image(date=cal.get_date()):
 
     # get description
     description = apod_info["explanation"]
-    # Description Lable
-    desLbl = Label(middle_frame, text=description, wraplength=700, justify="center")
-    desLbl.pack(anchor=CENTER)
+    # Description Text
+    desTxt = Label(middle_frame, text=description, wraplength=1500, height=6)
+    desTxt.pack(anchor=CENTER)
     
     #Change picture
     openImage = Image.open("APODPic.jpg")
