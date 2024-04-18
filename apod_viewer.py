@@ -40,8 +40,8 @@ image_frame.grid(row=0, column=0, columnspan=2)
 
 
 #frame for title and date (middle frame)
-# middle_frame = LabelFrame(root, text="") #This will need to be pulled from the API
-# middle_frame.grid(row=1, column=0)
+middle_frame = Label(root, text="") #This will need to be pulled from the API
+middle_frame.grid(row=1, column=0)
 
 #frame for cached image and set button (bottom left frame)
 bottom_left_frame = LabelFrame(root, text="View Cached Image")
@@ -67,6 +67,24 @@ img = ImageTk.PhotoImage(openIMG)
 label = Label(image_frame, image=img)
 label.grid()
 
+# TODO: Select Image Label
+selImgLbl = Label(bottom_left_frame, text="Select Image:")
+selImgLbl.grid()
+# TODO: Select Image drop down
+selImgcmbx = ttk.Combobox(bottom_left_frame)
+selImgcmbx.grid(padx=(10,3))
+# TODO: Set as Desktop button
+setDskBtn = Button(bottom_left_frame, text="Set as Desktop")
+setDskBtn.grid(row=1,column=1, padx=10, pady=10)
+
+# TODO: Select Date Label
+selDateLbl = Label(bottom_right_frame, text="Select Date:")
+selDateLbl.grid(padx=20, pady=2)
+
+# TODO: Calendar Date Picker combobox
+cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
+cal.grid()
+
 #show image preview in top frame when date is selected
 def show_image():
     # Remove the label
@@ -86,37 +104,14 @@ def show_image():
     # get description
     description = apod_info["explanation"]
     # Description Lable
-    desLbl = Label()
-    # Open IMage
-    openIMG = Image.open("APODPIC.jpg")
-    img = ImageTk.PhotoImage(openIMG)
-    return img
+    desLbl = Label(middle_frame, text=description)
+    desLbl.pack()
 
-# TODO: Select Image Label
-selImgLbl = Label(bottom_left_frame, text="Select Image:")
-selImgLbl.grid()
-# TODO: Select Image drop down
-selImgcmbx = ttk.Combobox(bottom_left_frame)
-selImgcmbx.grid(padx=(10,3))
-# TODO: Set as Desktop button
-setDskBtn = Button(bottom_left_frame, text="Set as Desktop")
-setDskBtn.grid(row=1,column=1, padx=10, pady=10)
-
-# TODO: Select Date Label
-selDateLbl = Label(bottom_right_frame, text="Select Date:")
-selDateLbl.grid(padx=20, pady=2)
-
-# TODO: Calendar Date Picker combobox
-cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
-cal.grid()
-
-
+    return
 
 # TODO: Download Image Button
 dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
 dwnldImgBtn.grid(row=1, column=1, padx=10, pady=10)
 dwnldImgBtn.config(command=show_image)
-
-
 
 root.mainloop()

@@ -68,7 +68,7 @@ def main():
     # test get all titles
     get_all_apod_titles()
 
-def get_apod_date(apod_date=date.today()):
+def get_apod_date():
     """Gets the APOD date
     s
     The APOD date is taken from the first command line parameter.
@@ -102,8 +102,8 @@ def get_apod_date(apod_date=date.today()):
                 apod_date = today_date
     
                 exit()
-    # Set apod_date to today's date if it's none
-    elif apod_date == None:
+    # Set apod_date to today's date
+    else:
         apod_date = today_date
     return apod_date
      
