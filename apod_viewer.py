@@ -17,7 +17,7 @@ from tkcalendar import DateEntry
 # Initialize the image cache
 apod_desktop.init_apod_cache()
 
-# TODO: Create the GUI
+#Create the GUI
 root = Tk()
 root.title("APOD Viewer")
 
@@ -47,41 +47,37 @@ image_frame.grid(row=0, column=0, columnspan=2)
 bottom_left_frame = LabelFrame(root, text="View Cached Image")
 bottom_left_frame.grid(row=1, column=0, padx=10, pady=10)
 
-#Allow the user to access cached images and apply them as their desktop background
-
-
-
 #frame for date entry and get download image button (bottom right frame)
 bottom_right_frame = LabelFrame(root, text="Get More Images")
 bottom_right_frame.grid(row=1, column=1, padx=100)
 
-# TODO: Set Icon
+#Set Icon
 iconID = 'COMP593.APODViewer'
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(iconID)
 root.iconbitmap('nasa.ico')
 
-# TODO: Set default picture
+#Set default picture
 openIMG = Image.open("moonwalking.jpg")
 img = ImageTk.PhotoImage(openIMG)
 # Add it to the label
 label = Label(image_frame, image=img)
 label.grid()
 
-# TODO: Select Image Label
+#Select Image Label
 selImgLbl = Label(bottom_left_frame, text="Select Image:")
 selImgLbl.grid()
-# TODO: Select Image drop down
+#Select Image drop down
 selImgcmbx = ttk.Combobox(bottom_left_frame)
 selImgcmbx.grid(padx=(10,3))
-# TODO: Set as Desktop button
+#Set as Desktop button
 setDskBtn = Button(bottom_left_frame, text="Set as Desktop")
 setDskBtn.grid(row=1,column=1, padx=10, pady=10)
 
-# TODO: Select Date Label
+#Select Date Label
 selDateLbl = Label(bottom_right_frame, text="Select Date:")
 selDateLbl.grid(padx=20, pady=2)
 
-# TODO: Calendar Date Picker combobox
+# Calendar Date Picker 
 cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
 cal.grid()
 
@@ -110,11 +106,10 @@ def show_image():
     img = ImageTk.PhotoImage(openIMG)
     return img
 
-# TODO: Download Image Button
+#Download Image Button
 dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
 dwnldImgBtn.grid(row=1, column=1, padx=10, pady=10)
 dwnldImgBtn.config(command=show_image)
-
 
 
 root.mainloop()
