@@ -32,7 +32,14 @@ import sqlite3
 
     # Import regex
 import re
+    # Get apod info url
+import apod_api
 
+    # requests
+import requests
+
+    # Hashlib
+import hashlib
 # Full paths of the image cache folder and database
 # - The image cache directory is a subdirectory of the specified parent directory.
 # - The image cache database is a sqlite database located in the image cache directory.
@@ -43,16 +50,16 @@ image_cache_db = os.path.join(image_cache_dir, 'image_cache.db')
 def main():
     ## DO NOT CHANGE THIS FUNCTION ##
     # Get the APOD date from the command line
-    apod_date = get_apod_date()    
+    apod_date = get_apod_date()
 
     # Initialize the image cache
     init_apod_cache()
-
+    
     # Add the APOD for the specified date to the cache
     apod_id = add_apod_to_cache(apod_date)
-
+    
     # Get the information for the APOD from the DB
-    apod_info = get_apod_info(apod_id)
+    apod_info = apod_api.get_apod_info(apod_id)
 
     # Set the APOD as the desktop background image
     if apod_id != 0:
@@ -151,23 +158,30 @@ def add_apod_to_cache(apod_date):
     print("APOD date:", apod_date.isoformat())
     # TODO: Download the APOD information from the NASA API
  
-    apod_info = get_apod_info(apod_date)
-
-
-   
+ 
+    # Get the info
+    apod_info = apod_api.get_apod_info(apod_date)
     # Hint: Use a function from image_lib.py 
+    apod_image = image_lib.download_image(apod_api.get_apod_image_url(apod_info))
 
-    apod_image = image_lib.download_image(apod_info['url'])
-
+    # GET message
+    respMsg = requests.get(apod_api.get_apod_image_url(apod_info))
+    
+    # Check if download was successful
+    if respMsg.status_code == requests.codes.ok:
+        # Extract binary data
+        content = respMsg.content
+        # Hash
+        apod_id = hashlib.sha256(content).hexdigest()
     # Hint: Use the get_apod_id_from_db() function below
-    apod_id = get_apod_id_from_db(apod_info['sha256'])
 
     # If the APOD does not exist in the cache, add it
     if apod_id == 0:
         # Add APOD to Cache
         apod_id = add_apod_to_db(apod_info['title'], apod_info['explanation'], apod_info['file_path'], apod_info['sha256'])
 
-  
+    # Get the title
+    title = apod_info["title"]
     #Use the determine_apod_file_path() function below to determine the image file path
     image_path = determine_apod_file_path(apod_info['title'], apod_info['url'])
     #Use a function from image_lib.py to save the image file
@@ -176,7 +190,7 @@ def add_apod_to_cache(apod_date):
 
     # Hint: Use the add_apod_to_db() function below
     add_apod_to_cache(apod_date)
-    return 0
+    return apod_id
 
 def add_apod_to_db(title, explanation, file_path, sha256):
     """Adds specified APOD information to the image cache DB.
