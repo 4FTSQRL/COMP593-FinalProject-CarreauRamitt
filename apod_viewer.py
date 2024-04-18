@@ -87,11 +87,15 @@ cal.grid()
 
 # Set as desktop
 def setAsDesktop():
+    # Get from the combo box
+    selectedValue = selImgcmbx.get()
     # Run show iMage
     show_image()
     # Run set as destkop
-    image_lib.set_desktop_background_image("APODPic.jpg")
+    image_lib.set_desktop_background_image(f"images/{selectedValue}")
 
+# Set Button click
+setDskBtn.config(command=setAsDesktop)
 #show image preview in top frame when date is selected
 def show_image(date=cal.get_date()):
     # get the date
