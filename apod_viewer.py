@@ -81,19 +81,11 @@ selDateLbl.grid()
 cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
 cal.grid()
 
-#Create dropdown menu that calendar will populate
-date = cal.get_date()
-print(date)
-
-#create event for date selection
-def get_date():
-    date = cal.get_date()
-    print(date)
-    return date
 
 #show image preview in top frame when date is selected
 def show_image():
-    date = get_date()
+    date = cal.get_date()
+    print(date)
     apod_info = apod_desktop.get_apod_info(date)
     image_url = apod_api.get_apod_image_url(apod_info)
     image_data = image_lib.download_image(image_url)
