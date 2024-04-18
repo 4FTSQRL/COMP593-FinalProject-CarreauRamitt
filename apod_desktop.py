@@ -68,9 +68,9 @@ def main():
     # test get all titles
     get_all_apod_titles()
 
-def get_apod_date():
+def get_apod_date(apod_date=date.today()):
     """Gets the APOD date
-     
+    s
     The APOD date is taken from the first command line parameter.
     Validates that the command line parameter specifies a valid APOD date.
     Prints an error message and exits script if the date is invalid.
@@ -80,7 +80,6 @@ def get_apod_date():
         date: APOD date
     """
     today_date = date.today()
-    apod_date = None
     apod_start_date = date(1995, 6, 16)  
     # get date from command line
     if len(argv) > 1:
@@ -101,11 +100,11 @@ def get_apod_date():
                 # if invalid date, use today's date
                 print("Invalid date. Please provide a date in the format YYYY-MM-DD. Today's date will be used instead.")
                 apod_date = today_date
+    
                 exit()
-    else:
-        #use today's date if no date is provided
+    # Set apod_date to today's date if it's none
+    elif apod_date == None:
         apod_date = today_date
-   
     return apod_date
      
 

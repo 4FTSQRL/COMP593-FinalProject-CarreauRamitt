@@ -81,7 +81,6 @@ selDateLbl.grid()
 cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
 cal.grid()
 
-
 #show image preview in top frame when date is selected
 def show_image():
     date = cal.get_date()

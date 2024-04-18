@@ -15,7 +15,6 @@ API_KEY = 'U7HLRY5ArCpjWIorpQN3fx4INNzCpVXkuNv4jYgw'
 # Main Function
 def main():
     # TODO: Add code to test the functions in this module.
-    
     # Get the date for the APOD
     date = apod_desktop.get_apod_date()
     
@@ -85,7 +84,6 @@ def get_apod_image_url(apod_info_dict):
     """
 
     # Check if the APOD is an image
-
     date = apod_desktop.get_apod_date()  
     apod_info_dict = get_apod_info(date)
     # If it is an image, get the URL of the high definition image
