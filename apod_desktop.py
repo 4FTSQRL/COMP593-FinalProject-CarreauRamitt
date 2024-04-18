@@ -158,8 +158,9 @@ def add_apod_to_cache(apod_date):
     print("APOD date:", apod_date.isoformat())
     # TODO: Download the APOD information from the NASA API
  
+ 
+    # Get the info
     apod_info = apod_api.get_apod_info(apod_date)
-    print(apod_info)
     # Hint: Use a function from image_lib.py 
     apod_image = image_lib.download_image(apod_api.get_apod_image_url(apod_info))
 
@@ -189,7 +190,7 @@ def add_apod_to_cache(apod_date):
 
     # Hint: Use the add_apod_to_db() function below
     add_apod_to_cache(apod_date)
-    return 0
+    return apod_id
 
 def add_apod_to_db(title, explanation, file_path, sha256):
     """Adds specified APOD information to the image cache DB.
