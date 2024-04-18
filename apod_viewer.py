@@ -87,7 +87,7 @@ def show_image():
     print(date)
     #id = apod_desktop.add_apod_to_cache(date)
     apod_info = apod_api.get_apod_info(date)
-    image_url = apod_api.get_apod_image_url(apod_info)
+    image_url = apod_info["url"]
     image_data = image_lib.download_image(image_url)
     image_lib.save_image_file(image_data, "apod.jpg")
     openIMG = Image.open("apod.jpg")
