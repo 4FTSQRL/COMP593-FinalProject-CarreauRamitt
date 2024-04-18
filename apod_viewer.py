@@ -113,24 +113,26 @@ def show_image(date=cal.get_date()):
     #frame for image (top frame)
     newRoot.columnconfigure(0,weight=2)
     newRoot.columnconfigure(1,weight=1)
+    newRoot.columnconfigure(2,weight=1)
     newRoot.rowconfigure(0,weight=1)
     newRoot.rowconfigure(1,weight=1)
+    newRoot.rowconfigure(2,weight=1)
     
     # top frame
     image_frame = ttk.Frame(newRoot)
-    image_frame.grid(row=0, column=0, columnspan=2)
+    image_frame.grid(row=0, column=0, columnspan=3)
 
     #frame for title and date (middle frame)
     middle_frame = Label(newRoot, text="") #This will need to be pulled from the API
-    middle_frame.grid(row=1, column=0)
+    middle_frame.grid(row=1, column=0,columnspan=3, padx=10, pady=10)
 
     #frame for cached image and set button (bottom left frame)
     bottom_left_frame = LabelFrame(newRoot, text="View Cached Image")
-    bottom_left_frame.grid(row=1, column=0, padx=10, pady=10)
+    bottom_left_frame.grid(row=2, column=0, padx=10, pady=10)
 
     #frame for date entry and get download image button (bottom right frame)
     bottom_right_frame = LabelFrame(newRoot, text="Get More Images")
-    bottom_right_frame.grid(row=1, column=1, padx=100)
+    bottom_right_frame.grid(row=2, column=2, padx=100)
 
     #Set Icon
     iconID = 'COMP593.APODViewer'
@@ -159,7 +161,7 @@ def show_image(date=cal.get_date()):
     description = apod_info["explanation"]
     # Description Lable
     desLbl = Label(middle_frame, text=description, wraplength=700, justify="center")
-    desLbl.grid(sticky=N)
+    desLbl.pack(anchor=CENTER)
     
     #Change picture
     openImage = Image.open("APODPic.jpg")
