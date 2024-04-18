@@ -115,14 +115,10 @@ def show_image(date=cal.get_date()):
     newRoot.columnconfigure(1,weight=1)
     newRoot.rowconfigure(0,weight=1)
     newRoot.rowconfigure(1,weight=1)
-        
-        
+    
+    # top frame
     image_frame = ttk.Frame(newRoot)
-
     image_frame.grid(row=0, column=0, columnspan=2)
-
-    #top frame widget
-
 
     #frame for title and date (middle frame)
     middle_frame = Label(newRoot, text="") #This will need to be pulled from the API
@@ -140,13 +136,6 @@ def show_image(date=cal.get_date()):
     iconID = 'COMP593.APODViewer'
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(iconID)
     newRoot.iconbitmap('nasa.ico')
-
-    #Set default picture
-    openIMG = Image.open("APODPic.jpg")
-    img = ImageTk.PhotoImage(openIMG)
-    # Add it to the label
-    label = Label(image_frame, image=img)
-    label.grid()
 
     #Select Image Label
     selImgLbl = Label(bottom_left_frame, text="Select Image:")
@@ -171,6 +160,15 @@ def show_image(date=cal.get_date()):
     # Description Lable
     desLbl = Label(middle_frame, text=description, wraplength=700, justify="center")
     desLbl.grid(sticky=N)
+    
+    #Change picture
+    openImage = Image.open("APODPic.jpg")
+    image = ImageTk.PhotoImage(openImage)
+    # Add it to the label
+    imageLabel = Label(image_frame, image=image)
+    imageLabel.image = image
+    imageLabel.grid()
+
     return 
 
 # TODO: Download Image Button
