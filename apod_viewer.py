@@ -45,11 +45,15 @@ image_frame.grid(row=0, column=0, columnspan=2)
 
 #frame for cached image and set button (bottom left frame)
 bottom_left_frame = LabelFrame(root, text="View Cached Image")
-bottom_left_frame.grid(row=1, column=0, padx=10)
+bottom_left_frame.grid(row=1, column=0, padx=10, pady=10)
+
+#Allow the user to access cached images and apply them as their desktop background
+
+
 
 #frame for date entry and get download image button (bottom right frame)
 bottom_right_frame = LabelFrame(root, text="Get More Images")
-bottom_right_frame.grid(row=1, column=1, padx=10)
+bottom_right_frame.grid(row=1, column=1, padx=100)
 
 # TODO: Set Icon
 iconID = 'COMP593.APODViewer'
@@ -71,11 +75,11 @@ selImgcmbx = ttk.Combobox(bottom_left_frame)
 selImgcmbx.grid(padx=(10,3))
 # TODO: Set as Desktop button
 setDskBtn = Button(bottom_left_frame, text="Set as Desktop")
-setDskBtn.grid(row=1,column=1, padx=10, pady=3)
+setDskBtn.grid(row=1,column=1, padx=10, pady=10)
 
 # TODO: Select Date Label
 selDateLbl = Label(bottom_right_frame, text="Select Date:")
-selDateLbl.grid()
+selDateLbl.grid(padx=20, pady=2)
 
 # TODO: Calendar Date Picker combobox
 cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
@@ -108,7 +112,7 @@ def show_image():
 
 # TODO: Download Image Button
 dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
-dwnldImgBtn.grid(row=1, column=1, pady=10)
+dwnldImgBtn.grid(row=1, column=1, padx=10, pady=10)
 dwnldImgBtn.config(command=show_image)
 
 
