@@ -59,11 +59,11 @@ def main():
     apod_id = add_apod_to_cache(apod_date)
     
     # Get the information for the APOD from the DB
-    apod_info = apod_api.get_apod_info(apod_id)
+    apod_info = apod_api.get_apod_info(apod_date)
 
     # Set the APOD as the desktop background image
     if apod_id != 0:
-        image_lib.set_desktop_background_image(apod_info['file_path'])
+        image_lib.set_desktop_background_image(determine_apod_file_path(apod_info['title'], apod_info['url']))
 
 def get_apod_date():
     """Gets the APOD date
@@ -202,6 +202,11 @@ def add_apod_to_cache(apod_date):
         # Hint: Use the add_apod_to_db() function below
         add_apod_to_cache(apod_date)
         
+        return apod_id
+    
+    # If apod exists
+    elif apod_id != 0:
+        # Return the id
         return apod_id
     return 0
 
