@@ -11,7 +11,7 @@ import ctypes
 # pillow
 from PIL import Image, ImageTk
 # tkcalendar
-from tkcalendar import Calendar
+from tkcalendar import DateEntry
 
 
 # Initialize the image cache
@@ -78,8 +78,8 @@ selDateLbl = Label(bottom_right_frame, text="Select Date:")
 selDateLbl.grid()
 
 # TODO: Calendar Date Picker combobox
-cal = Calendar(bottom_right_frame, selectmode = 'day', year=1995, month=6, day=16)
-cal.grid(padx=(10,3))
+cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
+cal.grid()
 
 #Create dropdown menu that calendar will populate
 date = cal.get_date()
