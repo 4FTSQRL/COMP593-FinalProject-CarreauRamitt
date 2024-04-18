@@ -67,24 +67,6 @@ img = ImageTk.PhotoImage(openIMG)
 label = Label(image_frame, image=img)
 label.grid()
 
-# TODO: Select Image Label
-selImgLbl = Label(bottom_left_frame, text="Select Image:")
-selImgLbl.grid()
-# TODO: Select Image drop down
-selImgcmbx = ttk.Combobox(bottom_left_frame)
-selImgcmbx.grid(padx=(10,3))
-# TODO: Set as Desktop button
-setDskBtn = Button(bottom_left_frame, text="Set as Desktop")
-setDskBtn.grid(row=1,column=1, padx=10, pady=10)
-
-# TODO: Select Date Label
-selDateLbl = Label(bottom_right_frame, text="Select Date:")
-selDateLbl.grid(padx=20, pady=2)
-
-# TODO: Calendar Date Picker combobox
-cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
-cal.grid()
-
 #show image preview in top frame when date is selected
 def show_image():
     # Remove the label
@@ -109,6 +91,26 @@ def show_image():
     openIMG = Image.open("APODPIC.jpg")
     img = ImageTk.PhotoImage(openIMG)
     return img
+
+# TODO: Select Image Label
+selImgLbl = Label(bottom_left_frame, text="Select Image:")
+selImgLbl.grid()
+# TODO: Select Image drop down
+selImgcmbx = ttk.Combobox(bottom_left_frame)
+selImgcmbx.grid(padx=(10,3))
+# TODO: Set as Desktop button
+setDskBtn = Button(bottom_left_frame, text="Set as Desktop")
+setDskBtn.grid(row=1,column=1, padx=10, pady=10)
+
+# TODO: Select Date Label
+selDateLbl = Label(bottom_right_frame, text="Select Date:")
+selDateLbl.grid(padx=20, pady=2)
+
+# TODO: Calendar Date Picker combobox
+cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
+cal.grid()
+
+
 
 # TODO: Download Image Button
 dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
