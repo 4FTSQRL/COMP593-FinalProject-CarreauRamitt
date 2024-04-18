@@ -107,6 +107,8 @@ def show_image():
 # TODO: Download Image Button
 dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
 dwnldImgBtn.grid(row=1, column=1, pady=10)
+dwnldImgBtn.config(command=show_image)
+
 
 
 root.mainloop()
