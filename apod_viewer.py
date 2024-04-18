@@ -98,16 +98,20 @@ def show_image():
     image_url = apod_info["url"]
     # Get image data
     image_data = image_lib.download_image(image_url)
+    image_lib.set_desktop_background_image("APODPic.jpg")
     # Save it 
     image_lib.save_image_file(image_data, "APODPic.jpg")
     
     # get description
     description = apod_info["explanation"]
     # Description Lable
-    desLbl = Label(middle_frame, text=description)
-    desLbl.pack()
+    desLbl = Label(middle_frame, text=description, wraplength=700, justify="center")
+    desLbl.grid(sticky=N)
 
-    return
+    # Get image
+    image = Image.open("APODPic.jpg")
+    photo = ImageTk.PhotoImage(image)
+    return photo
 
 # TODO: Download Image Button
 dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
