@@ -12,6 +12,10 @@ import ctypes
 from PIL import Image, ImageTk
 # tkcalendar
 from tkcalendar import DateEntry
+# requests
+import requests
+#import hashlib
+import hashlib
 
 
 # Initialize the image cache
@@ -115,8 +119,20 @@ def show_image(date=cal.get_date()):
     image_lib.set_desktop_background_image("APODPic.jpg")
     # Save it 
     image_lib.save_image_file(image_data, "APODPic.jpg")
+    # add to cache
+    apod_desktop.add_apod_to_cache(date)
     
+    # GET message
+    respMsg = requests.get(apod_api.get_apod_image_url(apod_info))
     
+    # Check if download was successful
+    if respMsg.status_code == requests.codes.ok:
+        # Extract binary data
+        content = respMsg.content
+        # Hash
+        hashValue = hashlib.sha256(content).hexdigest()
+    # Add to database
+    apod_desktop.add_apod_to_db(title=apod_info['title'],sha256=hashValue, file_path="APODPic.jpg", explanation=apod_info["explanation"])
     # Create new window
     #Create the GUI and set geometry
     newRoot = Tk()
