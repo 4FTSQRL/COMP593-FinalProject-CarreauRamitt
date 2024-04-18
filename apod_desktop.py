@@ -134,6 +134,19 @@ def init_apod_cache():
         # Create the database
         con = sqlite3.connect(image_cache_db)
         cur = con.cursor()
+        # query
+        query = """
+        CREATE TABLE IF NOT EXISTS apod
+        (
+            id  INTEGER PRIMARY KEY,
+            title   TEXT NOT NULL,
+            explanation TEXT NOT NULL,
+            file_path   TEXT NOT NULL,
+            sha256  TEXT NOT NULL
+        )
+        """
+        # Excute
+        cur.execute(query)
         # Close it up
         con.close()
     # If it already exists tell user
@@ -172,25 +185,26 @@ def add_apod_to_cache(apod_date):
         # Extract binary data
         content = respMsg.content
         # Hash
-        apod_id = hashlib.sha256(content).hexdigest()
+        hashValue = hashlib.sha256(content).hexdigest()
     # Hint: Use the get_apod_id_from_db() function below
-
+    # Compare the hash value
+    apod_id = get_apod_id_from_db(hashValue)
     # If the APOD does not exist in the cache, add it
     if apod_id == 0:
         # Add APOD to Cache
         apod_id = add_apod_to_db(apod_info['title'], apod_info['explanation'], apod_info['file_path'], apod_info['sha256'])
 
-    # Get the title
-    title = apod_info["title"]
-    #Use the determine_apod_file_path() function below to determine the image file path
-    image_path = determine_apod_file_path(apod_info['title'], apod_info['url'])
-    #Use a function from image_lib.py to save the image file
-    image_lib.save_image_file(apod_image, image_path)
+        #Use the determine_apod_file_path() function below to determine the image file path
+        image_path = determine_apod_file_path(apod_info['title'], apod_info['url'])
+        #Use a function from image_lib.py to save the image file
+        image_lib.save_image_file(apod_image, image_path)
 
 
-    # Hint: Use the add_apod_to_db() function below
-    add_apod_to_cache(apod_date)
-    return apod_id
+        # Hint: Use the add_apod_to_db() function below
+        add_apod_to_cache(apod_date)
+        
+        return apod_id
+    return 0
 
 def add_apod_to_db(title, explanation, file_path, sha256):
     """Adds specified APOD information to the image cache DB.
@@ -313,8 +327,9 @@ def get_apod_info(image_id):
         'sha256': 'SHA-256'
     }"""
     Get_apod_info_query = """
-    CREATE TABLE IF NOT EXISTS info
+    CREATE TABLE IF NOT EXISTS apod
     (
+        id      INTEGER PRIMARY KEY,
         title   TEXT NOT NULL,
         explanation TEXT NOT NULL,
         file_path   TEXT NOT NULL,
