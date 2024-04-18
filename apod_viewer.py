@@ -60,8 +60,8 @@ root.iconbitmap('nasa.ico')
 openIMG = Image.open("moonwalking.jpg")
 img = ImageTk.PhotoImage(openIMG)
 # Add it to the label
-imgLbl = Label(image_frame, image=img)
-imgLbl.grid()
+label = Label(image_frame, image=img)
+label.grid()
 
 # TODO: Select Image Label
 selImgLbl = Label(bottom_left_frame, text="Select Image:")
@@ -83,14 +83,15 @@ cal.grid()
 
 #show image preview in top frame when date is selected
 def show_image():
+    # Remove the label
+    label.after(1000, label.master.destroy())
     date = cal.get_date()
-    print(date)
     #id = apod_desktop.add_apod_to_cache(date)
     apod_info = apod_api.get_apod_info(date)
     image_url = apod_info["url"]
     image_data = image_lib.download_image(image_url)
-    image_lib.save_image_file(image_data, "apod.jpg")
-    openIMG = Image.open("apod.jpg")
+    image_lib.save_image_file(image_data, "APODPic.jpg")
+    openIMG = Image.open("APODPIC.jpg")
     img = ImageTk.PhotoImage(openIMG)
     imgLbl = Label(image_frame, image=img)
     imgLbl.grid()
