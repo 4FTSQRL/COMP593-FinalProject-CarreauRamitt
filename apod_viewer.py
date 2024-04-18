@@ -102,9 +102,10 @@ def show_image(date=cal.get_date()):
     
     
     # Create new window
-    #Create the GUI
+    #Create the GUI and set geometry
     newRoot = Tk()
     newRoot.title("APOD Viewer")
+    
 
 
     #Creating frames for the GUI
@@ -160,12 +161,14 @@ def show_image(date=cal.get_date()):
     # get description
     description = apod_info["explanation"]
     # Description Lable
-    desLbl = Label(middle_frame, text=description, wraplength=700, justify="center")
+    desLbl = Label(middle_frame, text=description, wraplength=00, justify="center")
     desLbl.pack(anchor=CENTER)
     
     #Change picture
     openImage = Image.open("APODPic.jpg")
-    image = ImageTk.PhotoImage(openImage)
+    resize_image = openImage.resize((500, 500))
+    image = ImageTk.PhotoImage(resize_image)
+    
     # Add it to the label
     imageLabel = Label(image_frame, image=image)
     imageLabel.image = image
