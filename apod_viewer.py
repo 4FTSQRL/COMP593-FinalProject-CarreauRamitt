@@ -158,11 +158,15 @@ def show_image(date=cal.get_date()):
     cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
     cal.grid()
 
+    # TODO: Download Image Button
+    dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
+    dwnldImgBtn.grid(row=1, column=1, padx=10, pady=10)
+    
     # get description
     description = apod_info["explanation"]
-    # Description Lable
-    desLbl = Label(middle_frame, text=description, wraplength=00, justify="center")
-    desLbl.pack(anchor=CENTER)
+    # Description Text
+    desTxt = Label(middle_frame, text=description, wraplength=1500, height=6)
+    desTxt.pack(anchor=CENTER)
     
     #Change picture
     openImage = Image.open("APODPic.jpg")

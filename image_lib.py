@@ -42,6 +42,11 @@ def download_image(image_url):
     if resp.status_code == requests.codes.ok:
         # Get the binary data
         binData = resp.content
+        # Get size
+        with Image.open("APODPic.jpg") as img:
+            size = img.size
+            # Scale image
+            scale_image(size)
         # Return the binary data
         return binData
     
