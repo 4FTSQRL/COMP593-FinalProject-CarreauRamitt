@@ -157,6 +157,10 @@ def show_image(date=cal.get_date()):
     cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
     cal.grid()
 
+    # TODO: Download Image Button
+    dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
+    dwnldImgBtn.grid(row=1, column=1, padx=10, pady=10)
+    
     # get description
     description = apod_info["explanation"]
     # Description Text
