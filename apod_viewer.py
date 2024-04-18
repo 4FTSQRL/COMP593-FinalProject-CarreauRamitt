@@ -86,15 +86,24 @@ def show_image():
     # Remove the label
     label.after(1000, label.master.destroy())
     date = cal.get_date()
-    #id = apod_desktop.add_apod_to_cache(date)
+    # Add to the cache
+    apod_desktop.add_apod_to_cache(date)
+    # Get the info
     apod_info = apod_api.get_apod_info(date)
+    # Get the url
     image_url = apod_info["url"]
+    # Get image data
     image_data = image_lib.download_image(image_url)
+    # Save it 
     image_lib.save_image_file(image_data, "APODPic.jpg")
+    
+    # get description
+    description = apod_info["explanation"]
+    # Description Lable
+    desLbl = Label()
+    # Open IMage
     openIMG = Image.open("APODPIC.jpg")
     img = ImageTk.PhotoImage(openIMG)
-    imgLbl = Label(image_frame, image=img)
-    imgLbl.grid()
     return img
 
 # TODO: Download Image Button
