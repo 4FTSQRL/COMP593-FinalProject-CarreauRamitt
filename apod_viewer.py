@@ -97,7 +97,7 @@ def show_image():
     apod_info = apod_desktop.get_apod_info(date)
     image_url = apod_api.get_apod_image_url(apod_info)
     image_data = image_lib.download_image(image_url)
-    apod_desktop.save_image_file(image_data, "apod.jpg")
+    image_lib.save_image_file(image_data, "apod.jpg")
     openIMG = Image.open("apod.jpg")
     img = ImageTk.PhotoImage(openIMG)
     imgLbl = Label(image_frame, image=img)
