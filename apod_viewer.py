@@ -39,7 +39,7 @@ image_frame.grid(row=0, column=0, columnspan=2)
 #top frame widget
 
 
-#frame for title and date (middle frame)
+#frame for title and  (middle frame)
 middle_frame = Label(root, text="") #This will need to be pulled from the API
 middle_frame.grid(row=1, column=0)
 
@@ -73,6 +73,17 @@ selImgLbl.grid()
 selImgcmbx = ttk.Combobox(bottom_left_frame, values=allImages)
 selImgcmbx.set("Select an Image")
 selImgcmbx.grid(padx=(10,3))
+
+# Set as desktop
+def setAsDesktop():
+    # Get from the combo box
+    selectedValue = selImgcmbx.get()
+    # Run show iMage
+    show_image()
+    # Run set as destkop
+    image_lib.set_desktop_background_image(f"images/{selectedValue}")
+
+
 #Set as Desktop button
 setDskBtn = Button(bottom_left_frame, text="Set as Desktop")
 setDskBtn.grid(row=1,column=1, padx=10, pady=10)
@@ -85,22 +96,12 @@ selDateLbl.grid(padx=20, pady=2)
 cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
 cal.grid()
 
-# Set as desktop
-def setAsDesktop():
-    # Get from the combo box
-    selectedValue = selImgcmbx.get()
-    # Run show iMage
-    show_image()
-    # Run set as destkop
-    image_lib.set_desktop_background_image(f"images/{selectedValue}")
-
 # Set Button click
 setDskBtn.config(command=setAsDesktop)
 #show image preview in top frame when date is selected
 def show_image(date=cal.get_date()):
     # get the date
-    #date = cal.get_date()
-    
+    date = cal.get_date()
     # Destroy the window
     root.destroy()
     # Add to the cache
@@ -120,11 +121,6 @@ def show_image(date=cal.get_date()):
     #Create the GUI and set geometry
     newRoot = Tk()
     newRoot.title("APOD Viewer")
-    
-
-
-    #Creating frames for the GUI
-
 
     #frame for image (top frame)
     newRoot.columnconfigure(0,weight=2)
@@ -170,8 +166,8 @@ def show_image(date=cal.get_date()):
     selDateLbl.grid(padx=20, pady=2)
 
     # Calendar Date Picker 
-    cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
-    cal.grid()
+    calendar = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
+    calendar.grid()
 
     # TODO: Download Image Button
     dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
