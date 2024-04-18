@@ -40,8 +40,8 @@ image_frame.grid(row=0, column=0, columnspan=2)
 
 
 #frame for title and date (middle frame)
-# middle_frame = LabelFrame(root, text="") #This will need to be pulled from the API
-# middle_frame.grid(row=1, column=0)
+middle_frame = Label(root, text="") #This will need to be pulled from the API
+middle_frame.grid(row=1, column=0)
 
 #frame for cached image and set button (bottom left frame)
 bottom_left_frame = LabelFrame(root, text="View Cached Image")
@@ -100,16 +100,14 @@ def show_image():
     # get description
     description = apod_info["explanation"]
     # Description Lable
-    desLbl = Label()
-    # Open IMage
-    openIMG = Image.open("APODPIC.jpg")
-    img = ImageTk.PhotoImage(openIMG)
-    return img
+    desLbl = Label(middle_frame, text=description)
+    desLbl.pack()
 
-#Download Image Button
+    return
+
+# TODO: Download Image Button
 dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
 dwnldImgBtn.grid(row=1, column=1, padx=10, pady=10)
 dwnldImgBtn.config(command=show_image)
-
 
 root.mainloop()
