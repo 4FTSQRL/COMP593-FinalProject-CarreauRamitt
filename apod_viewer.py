@@ -165,7 +165,7 @@ def show_image(date=cal.get_date()):
     # get description
     description = apod_info["explanation"]
     # Description Text
-    desTxt = Label(middle_frame, text=description, wraplength=1500, height=6)
+    desTxt = Label(middle_frame, text=description, wraplength=1100, height=6)
     desTxt.pack(anchor=CENTER)
     
     #Change picture
