@@ -171,11 +171,7 @@ def show_image(date=cal.get_date()):
     # Description Lable
     desLbl = Label(middle_frame, text=description, wraplength=700, justify="center")
     desLbl.grid(sticky=N)
-
-    # Get image
-    image = Image.open("APODPic.jpg")
-    photo = ImageTk.PhotoImage(image)
-    return photo
+    return 
 
 # TODO: Download Image Button
 dwnldImgBtn = Button(bottom_right_frame, text="Download Image")
