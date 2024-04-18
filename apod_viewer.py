@@ -63,11 +63,15 @@ img = ImageTk.PhotoImage(openIMG)
 label = Label(image_frame, image=img)
 label.grid()
 
+
+# Get all images from cache
+allImages = apod_desktop.get_all_apod_titles()
 #Select Image Label
 selImgLbl = Label(bottom_left_frame, text="Select Image:")
 selImgLbl.grid()
 #Select Image drop down
-selImgcmbx = ttk.Combobox(bottom_left_frame)
+selImgcmbx = ttk.Combobox(bottom_left_frame, values=allImages)
+selImgcmbx.set("Select an Image")
 selImgcmbx.grid(padx=(10,3))
 #Set as Desktop button
 setDskBtn = Button(bottom_left_frame, text="Set as Desktop")
@@ -80,6 +84,13 @@ selDateLbl.grid(padx=20, pady=2)
 # Calendar Date Picker 
 cal = DateEntry(bottom_right_frame, date_pattern="yyyy-mm-dd")
 cal.grid()
+
+# Set as desktop
+def setAsDesktop():
+    # Run show iMage
+    show_image()
+    # Run set as destkop
+    image_lib.set_desktop_background_image("APODPic.jpg")
 
 #show image preview in top frame when date is selected
 def show_image(date=cal.get_date()):
