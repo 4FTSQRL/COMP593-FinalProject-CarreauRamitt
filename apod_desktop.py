@@ -64,6 +64,9 @@ def main():
     # Set the APOD as the desktop background image
     if apod_id != 0:
         image_lib.set_desktop_background_image(determine_apod_file_path(apod_info['title'], apod_info['url']))
+        
+    # test get all titles
+    get_all_apod_titles()
 
 def get_apod_date():
     """Gets the APOD date
@@ -358,8 +361,18 @@ def get_all_apod_titles():
         list: Titles of all images in the cache
     """
     # get list of all titles in image cache 
+    # Connect to the database
+    con = sqlite3.connect(image_cache_db)
+    cur = con.cursor()
+    # Get the titles
+    cur.execute("SELECT title FROM apod")
+    # Fetch the titles
+    titles = cur.fetchall()
+    # Close the connection
+    con.close()
     
-    return 
+    # Return Statement
+    return titles
 
 
 if __name__ == '__main__':
